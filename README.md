@@ -34,41 +34,41 @@
 
 You can install it using  ```dpkg```
 
-```shell
-sudo dpkg -i /path/to/deb/file
+```bash
+$ sudo dpkg -i /path/to/deb/file
 ```
 
  followed by 
 
-```shell
-sudo apt-get install -f
+```bash
+$ sudo apt-get install -f
 ```
 
 
 
 You can install it using ```apt```
 
-```shell
-sudo apt install ./name.deb
+```bash
+$ sudo apt install ./name.deb
 ```
 
 or
 
-```shell
-sudo apt install /path/to/package/name.deb
+```bash
+$ sudo apt install /path/to/package/name.deb
 ```
 
 ##### Install ```gdebi``` and open your .deb file using it (Right-click -> Open with). It will install your .deb package with all its dependencies.
 Why to use ```sudo apt-get install -f``` after ```sudo dpkg -i /path/to/deb/file``` (mentioned in first method).
 
-```shell
+```bash
  -f, --fix-broken
 ```
 
 This attempt to correct a system with broken dependencies in place.
 When dpkg install a package and package dependency is not satisfied, it leaves the package in unconfigured state and that package is considered as broken.
 
-```shell
+```bash
 sudo apt-get install -f 
 ```
 
@@ -80,8 +80,8 @@ sudo apt-get install -f
 
 Install ```dirmngr ``` using 
 
-```shell
-sudo apt-get install dirmngr
+```bash
+$ sudo apt-get install dirmngr
 ```
 
 
@@ -103,13 +103,13 @@ sudo apt-get install dirmngr
 
 ## Disabling Bluetooth at Startup
 
-```shell
+```bash
 # Disable at startup
-sudo systemctl disable bluetooth.service
+$ sudo systemctl disable bluetooth.service
 # Check status at next restart
-sudo systemctl status bluetooth.service
+$ sudo systemctl status bluetooth.service
 # Renable at startup
-sudo systemctl enable bluetooth.service
+$ sudo systemctl enable bluetooth.service
 ```
 
 
@@ -129,38 +129,38 @@ Links : [4-second boot](https://mike42.me/blog/how-to-boot-debian-in-4-seconds) 
 
 - Reduce boot loader delay.
 
-  ```shell
-  sudo nano /etc/default/grub
+  ```bash
+  $ sudo nano /etc/default/grub
   ```
 
   Set GRUB_TIMEOUT = 0
 
-  ```shell
-  sudo update-grub2
+  ```bash
+  $ sudo update-grub2
   ```
 
 - Looking at systemd.
 
   - Analyse the boot timing.
 
-    ```shell
-    systemd-analyze plot > plot.svg
+    ```bash
+    $ systemd-analyze plot > plot.svg
     # Gives a Damn Beautiful Graph
     ```
 
   - For stopping  ```NetworkManager-wait-online``` service
 
-    ```shell
+    ```bash
     $ sudo systemctl disable NetworkManager-wait-online.service
     Removed /etc/systemd/system/network-online.target.wants/NetworkManager-wait-online.service.
     ```
 
   - Change Time syncing.
 
-    ```shell
-    sudo systemctl disable systemd-timesyncd.service
-    sudo apt-get install chrony
-    sudo systemctl enable chrony
+    ```bash
+    $ sudo systemctl disable systemd-timesyncd.service
+    $ sudo apt-get install chrony
+    $ sudo systemctl enable chrony
     ```
 
 
@@ -173,7 +173,7 @@ For the already existing repository using HTTP protocol use the below one liner
 Only for **github** users!!
 
 ```bash
-git remote set-url origin $(git remote show origin | grep "Fetch URL" | sed 's/ *Fetch URL: //' | sed 's/https:\/\/github.com\//git@github.com:/')
+$ git remote set-url origin $(git remote show origin | grep "Fetch URL" | sed 's/ *Fetch URL: //' | sed 's/https:\/\/github.com\//git@github.com:/')
 ```
 
 
@@ -189,7 +189,7 @@ This is bash script to check the given directory is in your PATH. In this case, 
 If not, we can add it to the PATH by the following script.
 
 ```bash
-echo 'export PATH=~/bin:$PATH' >> ~/.bash_profile
-source ~/.bash_profile
+$ echo 'export PATH=~/bin:$PATH' >> ~/.bash_profile
+$ source ~/.bash_profile
 ```
 

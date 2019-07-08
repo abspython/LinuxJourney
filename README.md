@@ -189,7 +189,7 @@ This is bash script to check the given directory is in your PATH. In this case, 
 If not, we can add it to the PATH by the following script.
 
 ```bash
-$ echo 'export PATH=~/bin:$PATH' >> ~/.bash_profile
-$ source ~/.bash_profile
+$ echo 'export PATH=~/bin:$PATH' >> ~/.bashrc
+$ source ~/.bashrc
 ```
 

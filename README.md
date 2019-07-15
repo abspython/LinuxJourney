@@ -136,7 +136,7 @@ Links : [4-second boot](https://mike42.me/blog/how-to-boot-debian-in-4-seconds) 
   Set GRUB_TIMEOUT = 0
 
   ```bash
-  $ sudo update-grub2
+  $ sudo update-grub
   ```
 
 - Looking at systemd.
@@ -160,7 +160,7 @@ Links : [4-second boot](https://mike42.me/blog/how-to-boot-debian-in-4-seconds) 
     ```bash
     $ sudo systemctl disable systemd-timesyncd.service
     $ sudo apt-get install chrony
-    $ sudo systemctl enable chrony
+    $ sudo systemctl enable chronyd
     ```
 
 
@@ -192,4 +192,50 @@ If not, we can add it to the PATH by the following script.
 $ echo 'export PATH=~/bin:$PATH' >> ~/.bashrc
 $ source ~/.bashrc
 ```
+
+
+
+## xbacklight not working 
+
+``xbacklight`` is a utility to control the brightness. (By function keys or similar binding keys)
+
+**Note** : ``xbacklight`` only works in Intel. Other drivers are not supported.
+
+If you get ``No outputs have backlight property`` error, it is because xbacklight
+
+does not choose the right directory in ``/sys/class/backlight``.
+
+The following steps are used to configure xbacklight properly.
+
+1. Check backlight directory: ``ls /sys/class/backlight``. In my case, I have ``intel_backlight``
+
+2. Run ``xrandr --verbose`` to get the identifier for the backlight. Mine happened to be ``0x42``
+
+3. Check for ``xorg.conf`` in ``/etc/X11/``. I didn't find one and made my own with the above information.
+
+   ```
+   Section "Device"
+   	Identifier "0x42"
+   	Driver "intel"
+   	Option "Backlight" "intel_backlight"
+   EndSection
+   ```
+
+4. Reboot the system.
+
+For Other drivers, use packages like [``brightnessctl``](https://github.com/Hummer12007/brightnessctl) or [``light``](https://github.com/haikarainen/light)
+
+
+
+# BTW, I use Arch 
+
+Didn't have time to go got pure Arch, so tried Manjaro(i3 community edition) and it is amazing.
+
+## locale issue
+
+Most uses(like me) don't even properly setup the locale configuration. To set locale do any of the following:
+
+1. Using Manjaro Settings Manager
+2. ``localetcl`` by systemd
+3. (Or go full nerdy by) manually editing ``/etc/locale.gen`` and run``locale-gen`` and then setting locale with ``/etc/locale.conf`` file.
 

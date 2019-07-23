@@ -227,6 +227,16 @@ For Other drivers, use packages like [``brightnessctl``](https://github.com/Humm
 
 
 
+## X11 or Wayland?
+
+To check whether you have X11 or Wayland use,
+
+```bash
+loginctl show-session $(loginctl | grep $(whoami) |awk '{print $1}') -p Type
+```
+
+
+
 # BTW, I use Arch 
 
 Didn't have time to go got pure Arch, so tried Manjaro(i3 community edition) and it is amazing.

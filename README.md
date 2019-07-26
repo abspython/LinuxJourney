@@ -237,9 +237,35 @@ loginctl show-session $(loginctl | grep $(whoami) |awk '{print $1}') -p Type
 
 
 
+## Enabling tapping on Touch pad
+
+This was a issue I faced in the Debian + i3wm setup and it can be solved by the following steps. (Assuming the system have ``lightdm`` as Display Manager and ``libinput`` as the input driver.)
+
+- Make a file named ``40-libinput.conf`` in ``/etc/X11/xorg.conf.d`` directory
+
+- Paste the below content to it.
+
+  - ```bash
+    Section "InputClass"
+            Identifier "libinput touchpad catchall"
+            MatchIsTouchpad "on"
+            MatchDevicePath "/dev/input/event*"
+            Driver "libinput"
+            Option "Tapping" "on"
+    EndSection
+    ```
+
+- Restart the system by,
+
+  - ```bash
+    systemctl restart lightdm
+    ```
+
+    
+
 # BTW, I use Arch 
 
-Didn't have time to go got pure Arch, so tried Manjaro(i3 community edition) and it is amazing.
+Didn't have time to go got pure Arch, so tried Manjaro (i3 community edition) and it is amazing.
 
 ## locale issue
 
